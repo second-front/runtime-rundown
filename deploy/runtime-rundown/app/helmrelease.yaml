@@ -1,0 +1,35 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: runtime-rundown
+  namespace: runtime-rundown
+spec:
+  interval: 5m
+  targetNamespace: runtime-rundown
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+
+  chartRef:
+    kind: OCIRepository
+    name: runtime-rundown
+    namespace: flux-system
+
+  # Put chart values here if you need overrides; leaving empty uses chart defaults.
+  values:
+    image:
+      repository: ghcr.io/ro11net/runtime-rundown  # Update this to your actual repository
+      pullPolicy: IfNotPresent
+      tag: latest
+    # PostgreSQL deployment (optional simple PostgreSQL for dev/testing)
+    postgres:
+      enabled: true
+    # Application configuration
+    app:
+      # Environment variables for the application
+      env:
+        SECURITY_LEVEL: "LOW"
+        MESSAGE: "Welcome to Flux Training!"

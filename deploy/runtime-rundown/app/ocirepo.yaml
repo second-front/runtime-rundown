@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: runtime-rundown
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: oci://ghcr.io/ro11net/runtime-rundown
+  ref:
+    tag: "0.4.4"
