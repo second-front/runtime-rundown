@@ -7,4 +7,4 @@ spec:
   interval: 10m
   url: oci://ghcr.io/ro11net/runtime-rundown
   ref:
-    tag: "0.4.4"
+    tag: "0.5.3" 
