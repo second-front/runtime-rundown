@@ -29,7 +29,5 @@ spec:
       enabled: true
     # Application configuration
     app:
-      # Environment variables for the application
-      env:
-        SECURITY_LEVEL: "LOW"
-        MESSAGE: "Welcome to Flux Training!"
+      securityLevel: "LOW"
+      message: "Welcome to Flux Training!"
