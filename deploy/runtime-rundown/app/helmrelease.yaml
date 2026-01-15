@@ -16,7 +16,7 @@ spec:
   chartRef:
     kind: OCIRepository
     name: runtime-rundown
-    namespace: flux-system
+    namespace: runtime-rundown
 
   # Put chart values here if you need overrides; leaving empty uses chart defaults.
   values:
@@ -29,7 +29,5 @@ spec:
       enabled: true
     # Application configuration
     app:
-      # Environment variables for the application
-      env:
-        SECURITY_LEVEL: "LOW"
-        MESSAGE: "Welcome to Flux Training!"
+      securityLevel: "LOW"
+      message: "Welcome to Flux Training!"
