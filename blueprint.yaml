@@ -33,3 +33,8 @@ spec:
   sourceRef:
     kind: OCIRepository
     name: runtime-rundown-blueprint
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
+        namespace: flux-system

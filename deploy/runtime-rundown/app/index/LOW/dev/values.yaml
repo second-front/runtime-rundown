@@ -1,0 +1,10 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: runtime-rundown
+  namespace: runtime-rundown
+spec:
+  values:
+    app:
+      message: "This is a development environment"

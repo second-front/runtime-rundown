@@ -29,5 +29,12 @@ spec:
       enabled: true
     # Application configuration
     app:
-      securityLevel: "LOW"
+      securityLevel: ${SECURITY_LEVEL}
       message: "Welcome to Flux Training!"
+    resources:
+      requests:
+        memory: "32Ki"
+        cpu: "1m"
+      limits:
+        memory: "64Mi"
+        cpu: "50m"

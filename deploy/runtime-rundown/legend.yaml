@@ -11,6 +11,8 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   path: "./runtime-rundown/app"
+  components:
+    - ./index/LOW/dev
   prune: true
   interval: 30m
   retryInterval: 1m
@@ -20,3 +22,8 @@ spec:
     name: runtime-rundown-blueprint
     namespace: runtime-rundown
   wait: true
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
+        namespace: flux-system
