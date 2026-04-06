@@ -2,7 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
   name: runtime-rundown
-  namespace: flux-system
+  namespace: runtime-rundown
 spec:
   interval: 10m
   url: oci://ghcr.io/ro11net/runtime-rundown
