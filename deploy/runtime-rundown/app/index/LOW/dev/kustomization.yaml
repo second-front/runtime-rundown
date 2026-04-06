@@ -7,4 +7,4 @@ patches:
       kind: HelmRelease
       name: runtime-rundown
       namespace: runtime-rundown
-    path: ./values.yaml
+    path: ./helmrelease.yaml

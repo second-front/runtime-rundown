@@ -21,13 +21,11 @@ spec:
   # Put chart values here if you need overrides; leaving empty uses chart defaults.
   values:
     image:
-      repository: ghcr.io/ro11net/runtime-rundown  # Update this to your actual repository
+      repository: ghcr.io/ro11net/runtime-rundown
       pullPolicy: IfNotPresent
       tag: latest
-    # PostgreSQL deployment (optional simple PostgreSQL for dev/testing)
     postgres:
       enabled: true
-    # Application configuration
     app:
       securityLevel: ${SECURITY_LEVEL}
       message: "Welcome to Flux Training!"

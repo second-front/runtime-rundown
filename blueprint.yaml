@@ -7,7 +7,6 @@ metadata:
     kustomize.toolkit.fluxcd.io/prune: disabled
     istio-injection: enabled
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1beta2.json
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
@@ -16,7 +15,7 @@ metadata:
 spec:
   interval: 1m
   ref:
-    tag: v0.1.0
+    tag: main
   url: oci://172.30.1.2:5000/library/runtime-rundown
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
@@ -33,7 +32,9 @@ spec:
   sourceRef:
     kind: OCIRepository
     name: runtime-rundown-blueprint
+  # In production, the kustomize mutating webhook injects these values automatically
+  # from the cluster-settings ConfigMap. Here they are set explicitly for the training environment.
   postBuild:
     substitute:
-      SECURITY_LEVEL: "HIGH"
-      RUNTIME_ENVIRONMENT: "prod"
+      SECURITY_LEVEL: "LOW"
+      RUNTIME_ENVIRONMENT: "dev"

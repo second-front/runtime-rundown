@@ -12,7 +12,8 @@ spec:
       app.kubernetes.io/name: *appname
   path: "./runtime-rundown/app"
   components:
-    - ./index/LOW/dev
+    - ./index/${SECURITY_LEVEL}/${RUNTIME_ENVIRONMENT}
+  ignoreMissingComponents: true
   prune: true
   interval: 30m
   retryInterval: 1m
@@ -22,7 +23,10 @@ spec:
     name: runtime-rundown-blueprint
     namespace: runtime-rundown
   wait: true
+  # The blueprint Kustomization resolves ${SECURITY_LEVEL} and ${RUNTIME_ENVIRONMENT} before
+  # applying this manifest to the cluster, so the child Kustomization always sees literal values.
+  # In production, the kustomize mutating webhook populates these on every Kustomization automatically.
   postBuild:
     substitute:
-      SECURITY_LEVEL: "HIGH"
-      RUNTIME_ENVIRONMENT: "prod"
+      SECURITY_LEVEL: "${SECURITY_LEVEL}"
+      RUNTIME_ENVIRONMENT: "${RUNTIME_ENVIRONMENT}"
