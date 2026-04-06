@@ -7,7 +7,6 @@ metadata:
     kustomize.toolkit.fluxcd.io/prune: disabled
     istio-injection: enabled
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1beta2.json
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
@@ -16,10 +15,9 @@ metadata:
 spec:
   interval: 1m
   ref:
-    tag: v0.1.0
+    tag: main
   url: oci://172.30.1.2:5000/library/runtime-rundown
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
