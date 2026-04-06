@@ -23,7 +23,6 @@ spec:
     namespace: runtime-rundown
   wait: true
   postBuild:
-    substituteFrom:
-      - kind: ConfigMap
-        name: cluster-settings
-        namespace: flux-system
+    substitute:
+      SECURITY_LEVEL: "HIGH"
+      RUNTIME_ENVIRONMENT: "prod"
