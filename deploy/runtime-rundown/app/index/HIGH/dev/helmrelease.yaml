@@ -1,0 +1,18 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: runtime-rundown
+  namespace: runtime-rundown
+spec:
+  values:
+    app:
+      securityLevel: "HIGH"
+      message: "HIGH security level - development environment"
+    securityContext:
+      runAsNonRoot: true
+      readOnlyRootFilesystem: true
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
