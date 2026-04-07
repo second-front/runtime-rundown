@@ -23,10 +23,31 @@ spec:
     name: runtime-rundown-blueprint
     namespace: runtime-rundown
   wait: true
-  # The blueprint Kustomization resolves ${SECURITY_LEVEL} and ${RUNTIME_ENVIRONMENT} before
-  # applying this manifest to the cluster, so the child Kustomization always sees literal values.
-  # In production, the kustomize mutating webhook populates these on every Kustomization automatically.
+  dependsOn:
+    - name: runtime-rundown-database
   postBuild:
     substitute:
       SECURITY_LEVEL: "${SECURITY_LEVEL}"
       RUNTIME_ENVIRONMENT: "${RUNTIME_ENVIRONMENT}"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &dbname runtime-rundown-database
+  namespace: runtime-rundown
+spec:
+  targetNamespace: runtime-rundown
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *dbname
+  path: "./runtime-rundown/database"
+  prune: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: OCIRepository
+    name: runtime-rundown-blueprint
+    namespace: runtime-rundown
+  wait: true

@@ -18,17 +18,25 @@ spec:
     name: runtime-rundown
     namespace: runtime-rundown
 
-  # Put chart values here if you need overrides; leaving empty uses chart defaults.
   values:
     image:
       repository: ghcr.io/ro11net/runtime-rundown
       pullPolicy: IfNotPresent
       tag: latest
     postgres:
-      enabled: true
+      enabled: false
     app:
       securityLevel: ${SECURITY_LEVEL}
       message: "Welcome to Flux Training!"
+      externalDatabase:
+        enabled: true
+        existingSecret: "runtime-rundown-app"
+        secretKeys:
+          host: "host"
+          port: "port"
+          database: "dbname"
+          username: "username"
+          password: "password"
     securityContext: {}
     resources:
       requests:
