@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &appname runtime-rundown
+  name: &elementName runtime-rundown
   namespace: runtime-rundown
 spec:
   targetNamespace: runtime-rundown
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *appname
+      runtime.secondfront.io/element: *elementName
   path: "./runtime-rundown/app"
   prune: true
   interval: 30m
